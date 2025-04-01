@@ -1,12 +1,12 @@
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface Context {
   params: { id: string }; // Define the expected structure
 }
 
-export async function PUT(request: Request, context: Context) {
+export async function PUT(request: NextRequest, context: Context) {
   await dbConnect();
   try {
     const { manualTime, reset } = await request.json();
