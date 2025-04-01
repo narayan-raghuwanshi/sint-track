@@ -2,11 +2,15 @@ import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
-export async function PUT(request: Request, context: any) {
+interface Context {
+  params: { id: string }; // Define the expected structure
+}
+
+export async function PUT(request: Request, context: Context) {
   await dbConnect();
   try {
     const { manualTime, reset } = await request.json();
-    const { id } = await context.params; // Ensure params are properly awaited
+    const { id } = await context.params; // No need to await this, it's an object
 
     let updateData;
     if (reset) {
