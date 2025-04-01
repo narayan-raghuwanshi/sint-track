@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
+export const dynamic = "force-dynamic";
 
+/**
+ * @method GET
+ * @method POST
+ * @returns NextResponse
+ * @description Find All Prompts and return
+ */
 export const GET = async () => {
   await dbConnect();
   try {
