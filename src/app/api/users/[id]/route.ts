@@ -2,11 +2,10 @@ import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(
+export const PUT = async (
   request: NextRequest,
-  //@ts-ignore
   { params }: { params: { id: string } }
-) {
+) => {
   await dbConnect();
   try {
     const { manualTime, reset } = await request.json();
@@ -32,4 +31,4 @@ export async function PUT(
       { status: 500 }
     );
   }
-}
+};
