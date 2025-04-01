@@ -14,17 +14,8 @@ export default function UserList({ users: initialUsers }: { users: IUser[] }) {
 
     const [users, setUsers] = useState<IUser[]>(parsedUsers);
     const [newUserName, setNewUserName] = useState('');
-    const [currentTime, setCurrentTime] = useState(new Date());
     const [editingUserId, setEditingUserId] = useState<string | null>(null);
     const [manualTime, setManualTime] = useState('');
-
-    // Update current time every minute for overdue checks
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 60000);
-        return () => clearInterval(interval);
-    }, []);
 
     const createUser = async () => {
         if (!newUserName.trim()) return;

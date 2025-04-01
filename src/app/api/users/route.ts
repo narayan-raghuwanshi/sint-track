@@ -8,10 +8,7 @@ export async function GET() {
     const users = await User.find().sort({ createdAt: -1 });
     return NextResponse.json(users);
   } catch (error) {
-    return NextResponse.json(
-      { message: "Error fetching users" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
@@ -22,9 +19,6 @@ export async function POST(request: Request) {
     const user = await User.create({ name });
     return NextResponse.json(user, { status: 201 });
   } catch (error) {
-    return NextResponse.json(
-      { message: "Error creating user" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }

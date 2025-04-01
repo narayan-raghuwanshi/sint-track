@@ -18,9 +18,6 @@ export async function PUT(
     });
     return NextResponse.json(user);
   } catch (error) {
-    return NextResponse.json(
-      { message: "Error updating user" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
