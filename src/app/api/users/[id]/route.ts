@@ -27,7 +27,7 @@ export const PUT = async (request: NextRequest) => {
       updateData = { lastVideoAssignedAt: new Date() };
     }
 
-    // Update the user in the database
+    //update the user in the database
     const user = await User.findByIdAndUpdate(id, updateData, {
       new: true, // Return the updated document
     });
