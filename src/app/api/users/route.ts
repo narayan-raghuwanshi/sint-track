@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 
-export async function GET() {
+export const GET = async () => {
   await dbConnect();
   try {
     const users = await User.find().sort({ createdAt: -1 });
@@ -10,9 +10,9 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 500 });
   }
-}
+};
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   await dbConnect();
   try {
     const { name } = await request.json();
@@ -21,4 +21,4 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 500 });
   }
-}
+};
