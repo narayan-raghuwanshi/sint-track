@@ -3,8 +3,8 @@ import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
 export const PUT = async (
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
+  request: NextRequest
 ) => {
   await dbConnect();
   try {
