@@ -83,22 +83,32 @@ export default function UserList({ users: initialUsers }: { users: IUser[] }) {
             console.error('Error creating user:', error);
         }
     };
-
     const updateVideoTime = async (userId: string, customTime?: string) => {
         try {
-            const body = customTime ? { manualTime: customTime } : {};
+            const body = customTime ? {
+                manualTime: new Date(customTime).toISOString() // Convert local time to UTC ISO string
+            } : {};
+
             const response = await fetch(`/api/users/${userId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             });
+
             const updatedUser = await response.json();
+
+            // Convert UTC time from server to local Date object
+            const istDate = updatedUser.lastVideoAssignedAt
+                ? new Date(updatedUser.lastVideoAssignedAt)
+                : null;
+
             setUsers(users.map(user =>
                 user._id === updatedUser._id ? {
                     ...updatedUser,
-                    lastVideoAssignedAt: new Date(updatedUser.lastVideoAssignedAt)
+                    lastVideoAssignedAt: istDate
                 } : user
             ));
+
             setEditingUserId(null);
             setManualTime('');
         } catch (error) {
